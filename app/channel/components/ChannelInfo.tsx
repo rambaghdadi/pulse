@@ -26,6 +26,7 @@ export const ChannelInfo = ({
 }: IChannelInfoProps) => {
   const headerImg = require("../../../assets/images/imgHeader.jpg");
   const AnimatedThemedView = Animated.createAnimatedComponent(ThemedView);
+  const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
   const theme = useColorScheme() ?? "light";
 
   return (
@@ -59,21 +60,19 @@ export const ChannelInfo = ({
             ],
           }}
         />
-        <Pressable>
-          <Animated.View
-            style={{
-              ...styles.subButton,
-              opacity: scrollData?.interpolate({
-                inputRange: [0, 25],
-                outputRange: [1, 0],
-              }),
-            }}
-          >
-            <ThemedText type="defaultSemiBold">
-              {isSubscribed ? "Unsubscribe" : "Subscribe"}
-            </ThemedText>
-          </Animated.View>
-        </Pressable>
+        <AnimatedPressable
+          style={{
+            ...styles.subButton,
+            // opacity: scrollData?.interpolate({
+            //   inputRange: [0, 100],
+            //   outputRange: [1, 0],
+            // }),
+          }}
+        >
+          <ThemedText type="defaultSemiBold">
+            {isSubscribed ? "Unsubscribe" : "Subscribe"}
+          </ThemedText>
+        </AnimatedPressable>
       </ThemedView>
       <ThemedView style={{ gap: 12, padding: 16 }}>
         <ThemedText type="title" style={styles.channelName}>
@@ -118,21 +117,20 @@ export const ChannelInfo = ({
 };
 const styles = StyleSheet.create({
   image: {
-    height: 75,
-    width: 75,
+    height: 100,
+    width: 100,
     borderWidth: 3,
     borderColor: "white",
     borderRadius: 6,
-    marginTop: -36,
+    marginTop: -40,
   },
   subButton: {
-    marginTop: -18,
-    borderRadius: 8,
-    backgroundColor: "#3796E9",
-    alignSelf: "flex-end",
     zIndex: -1,
+    borderRadius: 8,
+    backgroundColor: "blue",
     paddingHorizontal: 16,
     paddingVertical: 8,
+    alignSelf: "flex-end",
   },
   channelName: {
     letterSpacing: -0.5,
